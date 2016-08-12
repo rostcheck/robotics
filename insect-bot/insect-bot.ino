@@ -60,7 +60,8 @@ void setup()
 void scan()
 {  
   // read 5 distance values
-  for (i = 0; i < 5; i = i + 1) {
+  for (i = 0; i < 5; i = i + 1) 
+  {
     distanceCheck = analogRead(sensorPin);
     collectDistance[i] = distanceCheck;
     // serial output for testing
@@ -68,8 +69,8 @@ void scan()
     //Serial.print(" = ");
     //Serial.println(collectDistance[i]);
   }
-  // checksum of the 5 distance values for getting an average value. This will prevent the robot to change behavior by reading one wrong value
-  distance = (collectDistance[0]+collectDistance[1]+collectDistance[2]+collectDistance[3]+collectDistance[4])/5;
+  // Average 5 distance values. This will prevent the robot to change behavior by reading one wrong value
+  distance = (collectDistance[0] + collectDistance[1] + collectDistance[2] + collectDistance[3] + collectDistance[4])/5;
   delay(20);     
 } 
  
@@ -77,7 +78,8 @@ void scan()
 void moveForward()
 {  
   // loop for the servo angles to smoothen the steps
-  for (f = 0; f < 39; f++){
+  for (f = 0; f < 39; f++)
+  {
     frontRightUp++; 
     backLeftForward--;
     frontServo.write(frontRightUp);
@@ -86,7 +88,8 @@ void moveForward()
   }
 
   // loop for the servo angles to smoothen the steps
-  for (r = 0; r < 39; r++){
+  for (r = 0; r < 39; r++)
+  {
     frontRightUp--; 
     backLeftForward++;
     frontServo.write(frontRightUp);
@@ -131,8 +134,9 @@ void moveTurnLeft()
 
 // blink LED. This function can be called in any situation you want. Just add led(); in the code where you want to blink the LED.
 void led(int numBlinks){
-  // loop for the LED to blink it 5 times for 0.05 sec on and 0.1 sec off
-  for(int l=0; l<=numBlinks; l++) {
+  // loop for the LED to blink it numBlinks times, for 0.05 sec on and 0.1 sec off
+  for (int l = 0; l <= numBlinks; l++) 
+  {
     digitalWrite(13, HIGH);
     delay(50);
     digitalWrite(13, LOW);
@@ -146,23 +150,28 @@ void loop()
   // call function for checking the distance
   scan();
   //Serial.println(distance);
-  if (distance > 1){ // filters out the zero readings
+  if (distance > 1) // filters out the zero readings
+  { 
     // an obstacle is being detected
-    if (distance > dangerDistance) {
-      // LED at Pin 13 (standard) blinks 5x
-      led(5);
+    if (distance > dangerDistance) 
+    {      
+      led(5); // Blink LED 5x
       // 4 steps backward left
-      for(int i=0; i<=3; i++) {
+      for (int i = 0; i <= 3; i++) 
+      {
         moveBackRight();
         delay(walkSpeed);
       }
       led(4);
       // 4 steps forward left
-      for(int i=0; i<=3; i++) {
+      for (int i = 0; i <= 3; i++) 
+      {
         moveTurnLeft();
         delay(walkSpeed);
       }
-    } else {
+    } 
+    else 
+    {
       // all clear, no obstacle detected. Just walk forward
       led(1);
       moveForward();
