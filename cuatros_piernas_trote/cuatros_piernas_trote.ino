@@ -1,4 +1,4 @@
-// Pasear con cuatros pies
+// Pasear con cuatros patas, trotar modo de andar
 
 #include <Servo.h>                            // Incluye archivo para controlar servos
 
@@ -23,16 +23,15 @@ void setup()
 // Esta función corre repetidamente
 void loop()
 {
-  delay(100);
   pasar1();
-  delay(100);
+  delay(200);
   pasar2();
-  delay(100);
-  pasar3();
-  delay(100);
-  pasar4();
-  delay(100);
-  estarEnPie();
+  delay(200);
+  //pasar3();
+  //delay(300);  
+  //pasar4();  
+  //estarEnPie();
+  //delay(300);  
 }
 
 void estarEnPie()
@@ -45,22 +44,16 @@ void estarEnPie()
 
 void pasar1()
 {
-  servoFrente2.write(110);
+  servoFrente1.write(97);
+  servoAtras2.write(80);  
+  servoFrente2.write(97);
+  servoAtras1.write(80);  
 }
 
 void pasar2()
 {
-  servoAtras1.write(70);
-}
-
-void pasar3()
-{
-  servoFrente1.write(70);
-  servoFrente2.write(90);
-  servoAtras1.write(90);
-}
-
-void pasar4()
-{
-  servoAtras2.write(110);
+  servoFrente2.write(83);
+  servoAtras1.write(100);  
+  servoFrente1.write(83);
+  servoAtras2.write(100);
 }
